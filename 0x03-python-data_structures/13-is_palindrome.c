@@ -1,63 +1,67 @@
 #include "lists.h"
-#include <stdlib.h>
+
+
 
 /**
- * list_len - Calculate the number of elements.
- *
- * @h: Pointer to a list.
- *
- * Return: Integer.
- **/
 
-int list_len(const listint_t *h)
-{
+ * is_palindrome - checks if a linked list is a palindrome
 
-	int counter = 0;
-
-	while (h)
-	{
-		counter++;
-		h = h->next;
-	}
-	return (counter);
-}
-
-/**
- * is_palindrome - checks if a singly linked list is a palindrome.
  *
- * @head: pointer to the first node of the list.
+
+ * @head: the head address of the linked list
+
  *
- * Return: 0 if it is not a palindrome, 1 if it is a palindrome.
+
+ * Return: 1 if it's a palindrome, 0 else
+
  */
 
+
+
 int is_palindrome(listint_t **head)
+
 {
-	int *reversed_list, i, len;
-	listint_t *temp;
 
-	if (*head == NULL)
-		return (1);
-	temp = *head;
-	len = list_len(temp);
+	listint_t *cur = *head;
 
-	reversed_list = malloc(sizeof(int) * len);
-	temp = *head;
-	i = len - 1;
-	for (; i >= 0; i--)
+	int tab[2048], i = 0, j = 0;
+
+
+
+	if (*head)
+
 	{
-		reversed_list[i] = temp->n;
-		temp = temp->next;
-	}
-	temp = *head;
-	for (i = 0; i < len; i++)
-	{
-		if (reversed_list[i] != temp->n)
+
+		while (cur)
+
 		{
-			return (0);
-			free(reversed_list);
+
+			tab[i] = cur->n;
+
+			cur = cur->next;
+
+			i++;
+
 		}
-		temp = temp->next;
+
+
+
+		while (j < i / 2)
+
+		{
+
+			if (tab[j] == tab[i - j - 1])
+
+				j++;
+
+			else
+
+				return (0);
+
+		}
+
 	}
-	free(reversed_list);
+
 	return (1);
+
 }
