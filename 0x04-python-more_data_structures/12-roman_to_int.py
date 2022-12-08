@@ -2,26 +2,72 @@
 
 def roman_to_int(roman_string):
 
-    val = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        if type(roman_string) is not str or roman_string is None:
 
-    res = 0
-
-    p = 0
+                    return 0
 
 
 
-    if type(roman_string) is str and roman_string:
+                    n = []
 
-        for c in range(len(roman_string) - 1, -1, -1):
+                        for i in roman_string:
 
-            if val[roman_string[c]] >= p:
+                                    if i == 'I':
 
-                res += val[roman_string[c]]
+                                                    n.append(1)
 
-            else:
+                                                            if i == 'V':
 
-                res -= val[roman_string[c]]
+                                                                            n.append(5)
 
-            p = val[roman_string[c]]
+                                                                                    if i == 'X':
 
-    return 
+                                                                                                    n.append(10)
+
+                                                                                                            if i == 'L':
+
+                                                                                                                            n.append(50)
+
+                                                                                                                                    if i == 'C':
+
+                                                                                                                                                    n.append(100)
+
+                                                                                                                                                            if i == 'D':
+
+                                                                                                                                                                            n.append(500)
+
+                                                                                                                                                                                    if i == 'M':
+
+                                                                                                                                                                                                    n.append(1000)
+
+                                                                                                                                                                                                        result = 0
+
+                                                                                                                                                                                                            bool = False
+
+                                                                                                                                                                                                                for x in range(len(n)):
+
+                                                                                                                                                                                                                            if bool is True:
+
+                                                                                                                                                                                                                                            bool = False
+
+                                                                                                                                                                                                                                                        continue
+
+                                                                                                                                                                                                                                                            if (x + 1) < len(n):
+
+                                                                                                                                                                                                                                                                            if n[x] < n[x + 1]:
+
+                                                                                                                                                                                                                                                                                                result += n[x + 1] - n[x]
+
+                                                                                                                                                                                                                                                                                                                bool = True
+
+                                                                                                                                                                                                                                                                                                                                continue
+
+                                                                                                                                                                                                                                                                                                                                        else:
+
+                                                                                                                                                                                                                                                                                                                                                            result += n[x]
+
+                                                                                                                                                                                                                                                                                                                                                                    if (x + 1) == len(n):
+
+                                                                                                                                                                                                                                                                                                                                                                                    result += n[x]
+
+                                                                                                                                                                                                                                                                                                                                                                                        return result
