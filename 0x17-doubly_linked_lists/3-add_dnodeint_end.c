@@ -4,25 +4,21 @@
 
 /**
 
- * add_dnodeint_end - Adds a new node at the end of a dlistint_t list.
+ * add_dnodeint_end - adds a new node at the end of a dlistint_t list.
 
- * @head: A pointer to the head of the dlistint_t list.
+ * @head: pointer to the first element of the list.
 
- * @n: The integer for the new node to contain.
+ * @n: int to set in the new node.
 
- *
+ * Return: address of the new element, or NULL if it failed
 
- * Return: If the function fails - NULL.
-
- *         Otherwise - the address of the new node.
-
- */
+ **/
 
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 
 {
 
-	dlistint_t *new, *last;
+	dlistint_t *new, *aux = *head;
 
 
 
@@ -32,37 +28,35 @@ dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 
 		return (NULL);
 
-
-
 	new->n = n;
 
 	new->next = NULL;
 
 
 
-	if (*head == NULL)
+	if (aux)
 
 	{
 
-		new->prev = NULL;
+		while (aux->next)
 
-		*head = new;
+			aux = aux->next;
 
-		return (new);
+		new->prev = aux;
+
+		aux->next = new;
 
 	}
 
+	else
 
+	{
 
-	last = *head;
+		*head = new;
 
-	while (last->next != NULL)
+		new->prev = NULL;
 
-		last = last->next;
-
-	last->next = new;
-
-	new->prev = last;
+	}
 
 
 

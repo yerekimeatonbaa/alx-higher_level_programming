@@ -4,80 +4,96 @@
 
 /**
 
- * delete_dnodeint_at_index - Deletes a node from a dlistint_t
+ * delete_dnodeint_at_index - deletes the node at index of a dlistint_t list.
 
- *                            at a given index.
+ * @head: pointer to the list.
 
- * @head: A pointer to the head of the dlistint_t.
+ * @index: position of the node to delete.
 
- * @index: The index of the node to delete.
+ * Return: 1 if it succeeded, -1 if it failed.
 
- *
-
- * Return: Upon success - 1.
-
- *         Otherwise - -1.
-
- */
+ **/
 
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 
 {
 
-	dlistint_t *tmp = *head;
+	dlistint_t *aux_node = *head;
+
+	dlistint_t *node_to_delete = *head;
+
+	unsigned int idx;
+
+	unsigned int cont = 0;
 
 
 
-	if (*head == NULL)
+	/* border case for empty list */
+
+	if (!(*head))
 
 		return (-1);
 
 
 
-	for (; index != 0; index--)
+	/* border case for delete at the beginning */
+
+	if (index == 0)
 
 	{
 
-		if (tmp == NULL)
+		*head = node_to_delete->next;
 
-			return (-1);
+		free(node_to_delete);
 
-		tmp = tmp->next;
-
-	}
-
-
-
-	if (tmp == *head)
-
-	{
-
-		*head = tmp->next;
-
-		if (*head != NULL)
+		if (*head)
 
 			(*head)->prev = NULL;
 
+		return (1);
+
 	}
 
 
 
-	else
+	/* search of position to delete */
+
+	idx = index - 1;
+
+	while (aux_node && cont != idx)
 
 	{
 
-		tmp->prev->next = tmp->next;
+		cont++;
 
-		if (tmp->next != NULL)
-
-			tmp->next->prev = tmp->prev;
+		aux_node = aux_node->next;
 
 	}
 
 
 
-	free(tmp);
+	/* general case */
 
-	return (1);
+	if (cont == idx && aux_node)
+
+	{
+
+		node_to_delete = aux_node->next;
+
+		if (node_to_delete->next)
+
+		node_to_delete->next->prev = aux_node;
+
+		aux_node->next = node_to_delete->next;
+
+		free(node_to_delete);
+
+		return (1);
+
+	}
+
+
+
+	return (-1);
 
 }

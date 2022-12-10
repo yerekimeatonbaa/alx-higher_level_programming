@@ -4,38 +4,40 @@
 
 /**
 
- * get_dnodeint_at_index - Locates a node in a dlistint_t list.
+ * get_dnodeint_at_index - returns the nth node of a dlistint_t linked list.
 
- * @head: The head of the dlistint_t list.
+ * @head: pointer to the list.
 
- * @index: The node to locate.
+ * @index: nth node.
 
- *
+ * Return: nth node, if the node doesn't exist, returns NULL.
 
- * Return: If the node does not exist - NULL.
-
- *         Otherwise - the address of the located node.
-
- */
+ **/
 
 dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index)
 
 {
 
-	for (; index != 0; index--)
+	dlistint_t *node = head;
+
+	unsigned int cont = 0;
+
+
+
+	while (node && cont != index)
 
 	{
 
-		if (head == NULL)
+		cont++;
 
-			return (NULL);
-
-		head = head->next;
+		node = node->next;
 
 	}
 
+	if (node && cont == index)
 
+		return (node);
 
-	return (head);
+	return (NULL);
 
 }
