@@ -1,3 +1,3 @@
-#!/usr/bin/python3
+#!/bin/bash
 number = 98
 print(number, 'Battery street')
