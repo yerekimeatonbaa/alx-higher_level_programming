@@ -1,6 +1,9 @@
 #!/usr/bin/node
 const request = require('request');
-let url = 'http://swapi.co/api/films/' + process.argv[2];
-request(url, function (error, response, body) {
-  console.log(error || JSON.parse(body).title);
+const movieId = process.argv[2];
+const route = 'https://swapi-api.hbtn.io/api/films/' + movieId;
+request(route, (err, res, body) => {
+  if (err) throw err;
+  // Display the retrieved content
+  console.log(JSON.parse(body).title);
 });
