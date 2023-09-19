@@ -1,12 +1,14 @@
+#!/usr/bin/python3
+
 """
-    contains class Rectangle which implements Base.
+    contains class Rectangle which inherits from Base.
 """
 from models.base import Base
 
 
 class Rectangle(Base):
     """
-        class Rectangle implements Base.
+        class Rectangle inherits from Base.
         Methods:
             __init__()
     """
