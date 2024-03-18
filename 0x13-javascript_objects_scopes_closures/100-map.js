@@ -1,2 +1,11 @@
 #!/usr/bin/node
-exports.list = [1, 2, 3, 4, 5];
+const list = require('./100-data');
+
+// Compute new array using map
+const newList = list.map((value, index) => value * index);
+
+// Print initial list
+console.log("Initial List:", list);
+
+// Print new list
+console.log("New List:", newList);
